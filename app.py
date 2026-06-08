@@ -85,9 +85,9 @@ st.markdown(
         border-radius: 30px !important;
         background-color: #591C53 !important; 
         color: white !important;
-        font-size: 18px !important;
+        font-size: 15px !important;
         font-weight: 700 !important;
-        text-transform: uppercase !important; 
+        text-transform: 
         border: none !important;
         padding: 12px 0px !important;
     }
@@ -141,7 +141,7 @@ with tab1:
     col1, col2 = st.columns(2)
     with col1:
         genere = st.selectbox("Il tuo genere", ["Uomo", "Donna", "Non Binario", "Preferisco non specificare", "Altro"])
-        eta = st.number_input("Età", min_value=18, max_value=99, value=25)
+        eta = st.number_input("Età", min_value=18, max_value=99, value=18)
     with col2:
         orientamento = st.selectbox("Orientamento sessuale", [
             "Eterosessuale", "Gay", "Lesbica", "Bisessuale", "Panessuale", "Asessuale", "Queer", "Altro"
@@ -229,7 +229,7 @@ with tab2:
 # --- TAB 3: ANALISI BIO PERSONALE & CRINGIOMETRO ---
 # =====================================================================
 with tab3:
-    st.subheader("Fai un 'Audit' alla tua biografia attuale 🔍")
+    st.subheader("Fai un 'Check-up' alla tua biografia attuale 🔍")
     st.write("Inserisci la tua attuale bio per ricevere una pagella onesta dall'esperto e misurare il suo livello di cringe.")
     
     user_existing_bio = st.text_area("Incolla qui la bio che vuoi far analizzare", placeholder="Scrivi o incolla qui il testo...", key="existing_bio_audit")
