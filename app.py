@@ -5,6 +5,13 @@ import os
 import base64
 from openai import OpenAI
 
+# 0. CONFIGURAZIONE PAGINA (Aggiunge la fiammella e il titolo nella scheda del browser)
+st.set_page_config(
+    page_title="It's a match!",
+    page_icon="🔥",
+    layout="centered"
+)
+
 # 1. Caricamento dati
 df = pd.read_csv("clustered_bios.csv")
 
@@ -12,8 +19,8 @@ df = pd.read_csv("clustered_bios.csv")
 st.markdown(
     """
     <style>
-    /* Importazione diretta e forzata dei Font con tutti gli stili italic */
-    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600;1,700&family=Inter:wght@400;600;700&display=swap');
+    /* Importazione font: Inter per i testi e Syne per il titolo moderno d'impatto */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Syne:wght@700;800&display=swap');
     
     /* Font di lettura pulito per i testi nativi di Streamlit per fare contrasto */
     html, body, [class*="st-"], p, div, label, span, button, select, input, textarea {
@@ -28,33 +35,34 @@ st.markdown(
     /* CONTENITORE TITOLO */
     .titolo-custom-container {
         text-align: center !important; 
-        margin-top: 10px !important; 
-        margin-bottom: 5px !important;
+        margin-top: 20px !important; 
+        margin-bottom: 10px !important;
         width: 100% !important;
         display: block !important;
     }
 
-    /* TITOLO PRINCIPALE: IN CORSIVO ELEGANTE IDENTICO ALLA SCRITTA SOTTO */
+    /* TITOLO PRINCIPALE: NUOVO STILE BOLD, MODERNO E D'IMPATTO */
     .titolo-custom-container h1 {
-        font-family: 'Cormorant Garamond', serif !important;
-        font-style: italic !important; 
+        font-family: 'Syne', sans-serif !important;
+        text-transform: uppercase !important;
         color: #FF1744 !important; /* Rosso vivo acceso */
-        font-size: 135px !important; /* Dimensione gigante */
-        font-weight: 700 !important; 
+        font-size: 110px !important; /* Dimensione gigante bilanciata */
+        font-weight: 800 !important; /* Extra bold massiccio */
         margin: 0px auto !important;
         padding: 0px !important;
-        letter-spacing: -2px !important;
-        line-height: 0.95 !important;
+        letter-spacing: -4px !important; /* Lettere vicine e compatte stile poster */
+        line-height: 0.9 !important;
     }
 
-    /* Sottotitolo in corsivo */
+    /* Sottotitolo pulito e moderno */
     .titolo-custom-container p {
-        font-family: 'Cormorant Garamond', serif !important;
-        font-size: 34px !important;
-        font-style: italic !important;
+        font-family: 'Inter', sans-serif !important;
+        font-size: 22px !important;
+        font-weight: 600 !important;
         color: #5A5A5A !important; 
-        margin-top: 5px !important;
+        margin-top: 15px !important;
         margin-bottom: 30px !important;
+        letter-spacing: -0.5px !important;
     }
     
     /* Box contenitore del logo */
@@ -77,9 +85,9 @@ st.markdown(
         border-radius: 30px !important;
         background-color: #591C53 !important; 
         color: white !important;
-        font-size: 16px !important;
+        font-size: 18px !important;
         font-weight: 700 !important;
-        text-transform:  
+        text-transform: uppercase !important; 
         border: none !important;
         padding: 12px 0px !important;
     }
