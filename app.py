@@ -77,9 +77,9 @@ st.markdown(
         border-radius: 30px !important;
         background-color: #591C53 !important; 
         color: white !important;
-        font-size: 18px !important;
+        font-size: 16px !important;
         font-weight: 700 !important;
-        text-transform: uppercase !important; 
+        text-transform:  
         border: none !important;
         padding: 12px 0px !important;
     }
