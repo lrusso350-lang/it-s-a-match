@@ -21,15 +21,13 @@ df = pd.read_csv("clustered_bios.csv")
 st.markdown(
     """
     <style>
-    /* Importazione font */
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght=400;600;700&family=Outfit:wght=700;800&family=Manrope:wght=500;600;700&display=swap');
+    /* Importazione font migliorata */
+    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@800&family=Poppins:wght@600;700&family=Inter:wght@400;600&display=swap');
     
-    /* Font di lettura generico */
     html, body, [class*="st-"], p, div, label, span, button, select, input, textarea {
         font-family: 'Inter', sans-serif !important;
     }
     
-    /* Sfondo sfumato dell'applicazione */
     .stApp {
         background: linear-gradient(135deg, #FFF0F2 0%, #FF1F76 100%) !important;
     }
@@ -57,34 +55,32 @@ st.markdown(
         -webkit-text-fill-color: transparent;
     }
 
-    /* Sottotitolo ingrandito e ottimizzato */
-    .titolo-custom-container .sottotitolo-custom {
-        font-family: 'Manrope', sans-serif !important;
-        font-size: 42px !important; /* Ingrandito da 34px a 42px */
+    /* SOTTOTITOLO CON FONT AGGIORNATO (POPPINS/SAN-SERIF MODERNO) */
+    .titolo-custom-container h3.sottotitolo-custom {
+        font-family: 'Poppins', system-ui, -apple-system, sans-serif !important;
+        font-size: 38px !important; /* Dimensione bilanciata e d'impatto */
         font-weight: 700 !important;
         color: #FFFFFF !important;
-        margin-top: 20px !important;
+        margin-top: 25px !important;
         margin-bottom: 35px !important;
-        letter-spacing: -1px !important;
+        letter-spacing: -0.5px !important;
         line-height: 1.2 !important;
-        display: block !important;
+        border: none !important; /* Rimuove eventuali linee native di Streamlit per gli h3 */
+        padding: 0 !important;
     }
     
-    /* Box contenitore del logo */
     .logo-container {
         text-align: center;
         margin: 15px auto;
         width: 100%;
     }
     
-    /* Controllo totale dimensione logo */
     .logo-container img {
         max-width: 35% !important;
         height: auto !important;
         border-radius: 12px;
     }
     
-    /* Bottone viola scuro personalizzato */
     .stButton>button {
         width: 100% !important;
         border-radius: 30px !important;
@@ -110,7 +106,7 @@ st.markdown(
     """
     <div class="titolo-custom-container">
         <h1>It's a match!</h1>
-        <span class="sottotitolo-custom">Più match. Più affinità. Meno imbarazzo.</span>
+        <h3 class="sottotitolo-custom">Più match. Più affinità. Meno imbarazzo.</h3>
     </div>
     """,
     unsafe_allow_html=True
