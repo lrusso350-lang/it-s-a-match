@@ -10,7 +10,7 @@ from openai import OpenAI
 # =====================================================================
 st.set_page_config(
     page_title="It's a match!",
-    page_icon="🧩",
+    page_icon="https://fonts.gstatic.com/s/e/notoemoji/latest/1f9e9/512.png", # Link all'emoji del pezzo di puzzle
     layout="centered"
 )
 
