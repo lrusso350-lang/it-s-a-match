@@ -10,26 +10,76 @@ from openai import OpenAI
 # =====================================================================
 st.set_page_config(
     page_title="It's a match!",
-    page_icon="https://fonts.gstatic.com/s/e/notoemoji/latest/1f9e9/512.png", # Link all'emoji del pezzo di puzzle
+    page_icon="https://fonts.gstatic.com/s/e/notoemoji/latest/1f9e9/512.png", # Link diretto per forzare la cache dell'icona
     layout="centered"
 )
 
 # 1. Caricamento dati
 df = pd.read_csv("clustered_bios.csv")
 
-# 2. Configurazione della pagina e pulizia CSS
+# 2. Configurazione della pagina e pulizia CSS (Iniezione totale nel cuore di Streamlit)
 st.markdown(
     """
     <style>
-    /* Importazione font migliorata */
-    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@800&family=Poppins:wght@600;700&family=Inter:wght@400;600&display=swap');
+    /* Importazione font: Inter per i testi, Outfit per il titolo e Poppins per il sottotitolo */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Outfit:wght=700;800&family=Poppins:wght@600;700&display=swap');
     
+    /* Font di lettura pulito per i testi nativi di Streamlit per fare contrasto */
     html, body, [class*="st-"], p, div, label, span, button, select, input, textarea {
         font-family: 'Inter', sans-serif !important;
     }
     
+    /* CONTENITORE PRINCIPALE SFONDO */
     .stApp {
-        background: linear-gradient(135deg, #FFF0F2 0%, #FF1F76 100%) !important;
+        background-color: #FF1F76 !important; /* Colore di fallback */
+        position: relative;
+        overflow: hidden;
+    }
+    
+    /* ANIMAZIONE DELLE 3 IMMAGINI SFOCATE (Cambio ogni 20 secondi in loop) */
+    .stApp::before {
+        content: "";
+        position: fixed;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background-size: cover !important;
+        background-position: center !important;
+        background-attachment: fixed !important;
+        filter: blur(15px); /* Effetto sfocato premium */
+        transform: scale(1.1); /* Evita bordi bianchi causati dal blur */
+        z-index: -1;
+        animation: rotazioneSfondi 60s infinite linear;
+    }
+    
+    /* OVERLAY SEMI-TRASPARENTE PER MANTENERE IL TESTO LEGGIBILE */
+    .stApp::after {
+        content: "";
+        position: fixed;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: linear-gradient(135deg, rgba(255, 240, 242, 0.25) 0%, rgba(255, 31, 118, 0.45) 100%) !important;
+        z-index: -1;
+        pointer-events: none;
+    }
+
+    /* KEYFRAMES PER ROTAZIONE DELLE IMMAGINI CON DIODOLVENZA */
+    @keyframes rotazioneSfondi {
+        0%, 30% {
+            background-image: url('https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?q=80&w=1920&auto=format&fit=crop');
+        }
+        33.33% {
+            background-image: url('https://images.unsplash.com/photo-1518199266791-5375a83190b7?q=80&w=1920&auto=format&fit=crop');
+        }
+        36.66%, 63.33% {
+            background-image: url('https://images.unsplash.com/photo-1518199266791-5375a83190b7?q=80&w=1920&auto=format&fit=crop');
+        }
+        66.66% {
+            background-image: url('https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1920&auto=format&fit=crop');
+        }
+        70%, 96.66% {
+            background-image: url('https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1920&auto=format&fit=crop');
+        }
+        100% {
+            background-image: url('https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?q=80&w=1920&auto=format&fit=crop');
+        }
     }
     
     /* CONTENITORE TITOLO */
@@ -55,32 +105,35 @@ st.markdown(
         -webkit-text-fill-color: transparent;
     }
 
-    /* SOTTOTITOLO CON FONT AGGIORNATO (POPPINS/SAN-SERIF MODERNO) */
+    /* SOTTOTITOLO INGRANDITO E CON FONT AGGIORNATO */
     .titolo-custom-container h3.sottotitolo-custom {
         font-family: 'Poppins', system-ui, -apple-system, sans-serif !important;
-        font-size: 34px !important; /* Dimensione bilanciata e d'impatto */
+        font-size: 38px !important;
         font-weight: 700 !important;
         color: #FFFFFF !important;
         margin-top: 25px !important;
         margin-bottom: 35px !important;
         letter-spacing: -0.5px !important;
         line-height: 1.2 !important;
-        border: none !important; /* Rimuove eventuali linee native di Streamlit per gli h3 */
+        border: none !important;
         padding: 0 !important;
     }
     
+    /* Box contenitore del logo */
     .logo-container {
         text-align: center;
         margin: 15px auto;
         width: 100%;
     }
     
+    /* Controllo totale dimensione logo */
     .logo-container img {
         max-width: 35% !important;
         height: auto !important;
         border-radius: 12px;
     }
     
+    /* Bottone viola scuro personalizzato */
     .stButton>button {
         width: 100% !important;
         border-radius: 30px !important;
@@ -211,7 +264,7 @@ with tab2:
                 Bio Match: {target_bio_input}
                 
                 Genera un resoconto strutturato in questo modo:
-                1. **Punteggio di Affinità**: Calcola una percentuale da 0% a 100% basata sulle passioni comuni o complementari.
+                1. **Punteggio di Affinità**: Calcola una percentuale da 0% a 100% basata sulle passioni communes o complementari.
                 2. **Analisi di Compatibilità**: Spiega in modo chiaro e amichevole cosa unisce queste due persone e quali sono i punti di forza del match.
                 3. **3 Icebreaker Personalizzati**: Scrivi 3 frasi di apertura diverse (es. una divertente, una intrigante, una diretta) basate specificamente sugli elementi in comune trovati nelle bio, evitando assolutamente frasi fatte come 'Ciao, come va?'.
                 """
