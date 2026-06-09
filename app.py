@@ -58,7 +58,7 @@ st.markdown(
     /* SOTTOTITOLO CON FONT AGGIORNATO (POPPINS/SAN-SERIF MODERNO) */
     .titolo-custom-container h3.sottotitolo-custom {
         font-family: 'Poppins', system-ui, -apple-system, sans-serif !important;
-        font-size: 38px !important; /* Dimensione bilanciata e d'impatto */
+        font-size: 34px !important; /* Dimensione bilanciata e d'impatto */
         font-weight: 700 !important;
         color: #FFFFFF !important;
         margin-top: 25px !important;
