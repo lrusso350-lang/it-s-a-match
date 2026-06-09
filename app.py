@@ -5,7 +5,9 @@ import os
 import base64
 from openai import OpenAI
 
-# 0. CONFIGURAZIONE PAGINA (Aggiunge la fiammella e il titolo nella scheda del browser)
+# =====================================================================
+# 0. CONFIGURAZIONE PAGINA (TASSATIVAMENTE IN CIMA A TUTTO)
+# =====================================================================
 st.set_page_config(
     page_title="It's a match!",
     page_icon="🧩",
@@ -15,14 +17,14 @@ st.set_page_config(
 # 1. Caricamento dati
 df = pd.read_csv("clustered_bios.csv")
 
-# 2. Configurazione della pagina e pulizia CSS (Iniezione totale nel cuore di Streamlit)
+# 2. Configurazione della pagina e pulizia CSS
 st.markdown(
     """
     <style>
-    /* Importazione font: Inter per i testi e Syne per il titolo moderno d'impatto */
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Outfit:wght@700;800&family=Manrope:wght@500;600;700&display=swap');
+    /* Importazione font */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght=400;600;700&family=Outfit:wght=700;800&family=Manrope:wght=500;600;700&display=swap');
     
-    /* Font di lettura pulito per i testi nativi di Streamlit per fare contrasto */
+    /* Font di lettura generico */
     html, body, [class*="st-"], p, div, label, span, button, select, input, textarea {
         font-family: 'Inter', sans-serif !important;
     }
@@ -42,38 +44,31 @@ st.markdown(
     }
 
     .titolo-custom-container h1 {
-    font-family: 'Outfit', sans-serif !important;
-    text-transform: uppercase !important;
-    font-size: 110px !important;
-    font-weight: 800 !important;
-    margin: 0px auto !important;
-    padding: 0px !important;
-    letter-spacing: -4px !important;
-    line-height: 0.9 !important;
-
-    background: linear-gradient(
-        90deg,
-        #FF005C,
-        #FF4D88,
-        #FF7AB6
-    );
-
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
+        font-family: 'Outfit', sans-serif !important;
+        text-transform: uppercase !important;
+        font-size: 110px !important;
+        font-weight: 800 !important;
+        margin: 0px auto !important;
+        padding: 0px !important;
+        letter-spacing: -4px !important;
+        line-height: 0.9 !important;
+        background: linear-gradient(90deg, #FF005C, #FF4D88, #FF7AB6);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
     }
 
-    /* Sottotitolo pulito e moderno */
-    .titolo-custom-container p {
-    font-family: 'Manrope', sans-serif !important;
-    font-size: 34px !important;
-    font-weight: 700 !important;
-    color: #FFFFFF !important;
-    margin-top: 10px !important;
-    margin-bottom: 35px !important;
-    letter-spacing: -1px !important;
-    line-height: 1.1 !important;
-}
+    /* Sottotitolo ingrandito e ottimizzato */
+    .titolo-custom-container .sottotitolo-custom {
+        font-family: 'Manrope', sans-serif !important;
+        font-size: 42px !important; /* Ingrandito da 34px a 42px */
+        font-weight: 700 !important;
+        color: #FFFFFF !important;
+        margin-top: 20px !important;
+        margin-bottom: 35px !important;
+        letter-spacing: -1px !important;
+        line-height: 1.2 !important;
+        display: block !important;
+    }
     
     /* Box contenitore del logo */
     .logo-container {
@@ -97,7 +92,6 @@ st.markdown(
         color: white !important;
         font-size: 15px !important;
         font-weight: 700 !important;
-        text-transform: 
         border: none !important;
         padding: 12px 0px !important;
     }
@@ -116,7 +110,7 @@ st.markdown(
     """
     <div class="titolo-custom-container">
         <h1>It's a match!</h1>
-        <p>Più match. Più affinità. Meno imbarazzo.</p>
+        <span class="sottotitolo-custom">Più match. Più affinità. Meno imbarazzo.</span>
     </div>
     """,
     unsafe_allow_html=True
