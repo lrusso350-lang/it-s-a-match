@@ -17,7 +17,9 @@ st.set_page_config(
 # 1. Caricamento dati
 df = pd.read_csv("clustered_bios.csv")
 
-# 2. Configurazione della pagina e pulizia CSS (Iniezione totale nel cuore di Streamlit)
+# =====================================================================
+# 2. CONFIGURAZIONE DELLA PAGINA E LIVELLO HTML/CSS PER LO SFONDO
+# =====================================================================
 st.markdown(
     """
     <div class="super-sfondo-animato"></div>
@@ -55,32 +57,26 @@ st.markdown(
 
     /* KEYFRAMES PER ROTAZIONE DELLE IMMAGINI CON OVERLAY COLORATO INTEGRATO */
     @keyframes rotazioneSfondi {
-        /* IMMAGINE 1 + Filtro Rosa semi-trasparente */
         0%, 30% {
             background-image: linear-gradient(135deg, rgba(255, 240, 242, 0.25) 0%, rgba(255, 31, 118, 0.45) 100%), 
                               url('https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?q=80&w=1920&auto=format&fit=crop');
         }
-        /* Transizione fluida */
         33.33% {
             background-image: linear-gradient(135deg, rgba(255, 240, 242, 0.25) 0%, rgba(255, 31, 118, 0.45) 100%), 
                               url('https://images.unsplash.com/photo-1518199266791-5375a83190b7?q=80&w=1920&auto=format&fit=crop');
         }
-        /* IMMAGINE 2 */
         36.66%, 63.33% {
             background-image: linear-gradient(135deg, rgba(255, 240, 242, 0.25) 0%, rgba(255, 31, 118, 0.45) 100%), 
                               url('https://images.unsplash.com/photo-1518199266791-5375a83190b7?q=80&w=1920&auto=format&fit=crop');
         }
-        /* Transizione fluida */
         66.66% {
             background-image: linear-gradient(135deg, rgba(255, 240, 242, 0.25) 0%, rgba(255, 31, 118, 0.45) 100%), 
                               url('https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1920&auto=format&fit=crop');
         }
-        /* IMMAGINE 3 */
         70%, 96.66% {
             background-image: linear-gradient(135deg, rgba(255, 240, 242, 0.25) 0%, rgba(255, 31, 118, 0.45) 100%), 
                               url('https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1920&auto=format&fit=crop');
         }
-        /* Ritorno all'immagine iniziale */
         100% {
             background-image: linear-gradient(135deg, rgba(255, 240, 242, 0.25) 0%, rgba(255, 31, 118, 0.45) 100%), 
                               url('https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?q=80&w=1920&auto=format&fit=crop');
@@ -158,7 +154,6 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
-)
 
 # --- BLOCCO TITOLO AGGIORNATO ---
 st.markdown(
@@ -227,7 +222,7 @@ with tab1:
             with st.spinner("L'esperto AI sta creando la tua bio..."):
                 prompt_bio = f"""
                 Sei un esperto di dating app e approcci sui comportamenti degli utenti.
-                Genera una nuova bio per Tinder che sia originale, inclusiva e non banale.
+                Genera una newline bio per Tinder che sia originale, inclusiva e non banale.
 
                 Dati Utente:
                 Genere: {genere}
@@ -270,7 +265,7 @@ with tab2:
                 Bio Match: {target_bio_input}
                 
                 Genera un resoconto strutturato in questo modo:
-                1. **Punteggio di Affinità**: Calcola una percentuale da 0% a 100% basata sulle passioni communes o complementari.
+                1. **Punteggio di Affinità**: Calcola una percentuale da 0% a 100% basata sulle passioni comuni o complementari.
                 2. **Analisi di Compatibilità**: Spiega in modo chiaro e amichevole cosa unisce queste due persone e quali sono i punti di forza del match.
                 3. **3 Icebreaker Personalizzati**: Scrivi 3 frasi di apertura diverse (es. una divertente, una intrigante, una diretta) basate specificamente sugli elementi in comune trovati nelle bio, evitando assolutamente frasi fatte come 'Ciao, come va?'.
                 """
