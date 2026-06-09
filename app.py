@@ -8,7 +8,7 @@ from openai import OpenAI
 # 0. CONFIGURAZIONE PAGINA (Aggiunge la fiammella e il titolo nella scheda del browser)
 st.set_page_config(
     page_title="It's a match!",
-    page_icon="🔥",
+    page_icon="🧩",
     layout="centered"
 )
 
@@ -20,7 +20,7 @@ st.markdown(
     """
     <style>
     /* Importazione font: Inter per i testi e Syne per il titolo moderno d'impatto */
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Syne:wght@700;800&display=swap');
+   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Outfit:wght@700;800&display=swap');
     
     /* Font di lettura pulito per i testi nativi di Streamlit per fare contrasto */
     html, body, [class*="st-"], p, div, label, span, button, select, input, textarea {
@@ -41,17 +41,26 @@ st.markdown(
         display: block !important;
     }
 
-    /* TITOLO PRINCIPALE: NUOVO STILE BOLD, MODERNO E D'IMPATTO */
     .titolo-custom-container h1 {
-        font-family: 'Syne', sans-serif !important;
-        text-transform: uppercase !important;
-        color: #FF1744 !important; /* Rosso vivo acceso */
-        font-size: 110px !important; /* Dimensione gigante bilanciata */
-        font-weight: 800 !important; /* Extra bold massiccio */
-        margin: 0px auto !important;
-        padding: 0px !important;
-        letter-spacing: -4px !important; /* Lettere vicine e compatte stile poster */
-        line-height: 0.9 !important;
+    font-family: 'Outfit', sans-serif !important;
+    text-transform: uppercase !important;
+    font-size: 110px !important;
+    font-weight: 800 !important;
+    margin: 0px auto !important;
+    padding: 0px !important;
+    letter-spacing: -4px !important;
+    line-height: 0.9 !important;
+
+    background: linear-gradient(
+        90deg,
+        #FF005C,
+        #FF4D88,
+        #FF7AB6
+    );
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
     }
 
     /* Sottotitolo pulito e moderno */
@@ -106,7 +115,7 @@ st.markdown(
     """
     <div class="titolo-custom-container">
         <h1>It's a match!</h1>
-        <p>Il tuo assistente personale per un profilo perfetto</p>
+        <p>Più match. Più affinità. Meno imbarazzo.</p>
     </div>
     """,
     unsafe_allow_html=True
