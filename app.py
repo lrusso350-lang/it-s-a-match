@@ -20,6 +20,8 @@ df = pd.read_csv("clustered_bios.csv")
 # 2. Configurazione della pagina e pulizia CSS (Iniezione totale nel cuore di Streamlit)
 st.markdown(
     """
+    <div class="super-sfondo-animato"></div>
+    
     <style>
     /* Importazione font: Inter per i testi, Outfit per il titolo e Poppins per il sottotitolo */
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Outfit:wght=700;800&family=Poppins:wght@600;700&display=swap');
@@ -29,56 +31,59 @@ st.markdown(
         font-family: 'Inter', sans-serif !important;
     }
     
-    /* CONTENITORE PRINCIPALE SFONDO */
-    .stApp {
-        background-color: #FF1F76 !important; 
-        position: relative;
+    /* CONFIGURAZIONE DEL LIVELLO INTERFACCIA DI STREAMLIT */
+    /* Rendiamo trasparenti i contenitori nativi così lo sfondo personalizzato sottostante è visibile */
+    [data-testid="stAppViewContainer"], [data-testid="stHeader"], [data-testid="stMain"] {
+        background-color: transparent !important;
     }
     
-    /* ANIMAZIONE DELLE 3 IMMAGINI SFOCATE (Cambio ogni 20 secondi in loop) */
-    .stApp::before {
-        content: "";
+    /* IL NUOVO CONTENITORE DELLO SFONDO: Completamente isolato e spedito sul fondo */
+    .super-sfondo-animato {
         position: fixed;
-        top: 0; left: 0; right: 0; bottom: 0;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: -999999 !important; /* Valore estremo per stare dietro a TUTTO */
         background-size: cover !important;
         background-position: center !important;
-        background-attachment: fixed !important;
-        filter: blur(15px); 
-        transform: scale(1.1); 
-        z-index: -2 !important; /* Spostato ancora più indietro */
+        filter: blur(15px); /* Forza l'effetto sfocato premium */
+        transform: scale(1.1); /* Previene i bordi bianchi causati dal blur */
+        pointer-events: none !important; /* Rende lo sfondo invisibile ai click del mouse */
         animation: rotazioneSfondi 60s infinite linear;
-        pointer-events: none !important;
-    }
-    
-    /* OVERLAY SEMI-TRASPARENTE PER MANTENERE IL TESTO LEGGIBILE */
-    .stApp::after {
-        content: "";
-        position: fixed;
-        top: 0; left: 0; right: 0; bottom: 0;
-        background: linear-gradient(135deg, rgba(255, 240, 242, 0.25) 0%, rgba(255, 31, 118, 0.45) 100%) !important;
-        z-index: -1 !important; /*層 Dietro ai moduli di Streamlit */
-        pointer-events: none !important; /* Impedisce di bloccare i click dell'utente */
     }
 
-    /* KEYFRAMES PER ROTAZIONE DELLE IMMAGINI CON DISSOLVENZA */
+    /* KEYFRAMES PER ROTAZIONE DELLE IMMAGINI CON OVERLAY COLORATO INTEGRATO */
     @keyframes rotazioneSfondi {
+        /* IMMAGINE 1 + Filtro Rosa semi-trasparente */
         0%, 30% {
-            background-image: url('https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?q=80&w=1920&auto=format&fit=crop');
+            background-image: linear-gradient(135deg, rgba(255, 240, 242, 0.25) 0%, rgba(255, 31, 118, 0.45) 100%), 
+                              url('https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?q=80&w=1920&auto=format&fit=crop');
         }
+        /* Transizione fluida */
         33.33% {
-            background-image: url('https://images.unsplash.com/photo-1518199266791-5375a83190b7?q=80&w=1920&auto=format&fit=crop');
+            background-image: linear-gradient(135deg, rgba(255, 240, 242, 0.25) 0%, rgba(255, 31, 118, 0.45) 100%), 
+                              url('https://images.unsplash.com/photo-1518199266791-5375a83190b7?q=80&w=1920&auto=format&fit=crop');
         }
+        /* IMMAGINE 2 */
         36.66%, 63.33% {
-            background-image: url('https://images.unsplash.com/photo-1518199266791-5375a83190b7?q=80&w=1920&auto=format&fit=crop');
+            background-image: linear-gradient(135deg, rgba(255, 240, 242, 0.25) 0%, rgba(255, 31, 118, 0.45) 100%), 
+                              url('https://images.unsplash.com/photo-1518199266791-5375a83190b7?q=80&w=1920&auto=format&fit=crop');
         }
+        /* Transizione fluida */
         66.66% {
-            background-image: url('https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1920&auto=format&fit=crop');
+            background-image: linear-gradient(135deg, rgba(255, 240, 242, 0.25) 0%, rgba(255, 31, 118, 0.45) 100%), 
+                              url('https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1920&auto=format&fit=crop');
         }
+        /* IMMAGINE 3 */
         70%, 96.66% {
-            background-image: url('https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1920&auto=format&fit=crop');
+            background-image: linear-gradient(135deg, rgba(255, 240, 242, 0.25) 0%, rgba(255, 31, 118, 0.45) 100%), 
+                              url('https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1920&auto=format&fit=crop');
         }
+        /* Ritorno all'immagine iniziale */
         100% {
-            background-image: url('https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?q=80&w=1920&auto=format&fit=crop');
+            background-image: linear-gradient(135deg, rgba(255, 240, 242, 0.25) 0%, rgba(255, 31, 118, 0.45) 100%), 
+                              url('https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?q=80&w=1920&auto=format&fit=crop');
         }
     }
     
@@ -152,6 +157,7 @@ st.markdown(
     </style>
     """,
     unsafe_allow_html=True
+)
 )
 
 # --- BLOCCO TITOLO AGGIORNATO ---
