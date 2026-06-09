@@ -22,63 +22,63 @@ df = pd.read_csv("clustered_bios.csv")
 # =====================================================================
 st.markdown(
     """
-    <div class="super-sfondo-animato"></div>
-    
     <style>
-    /* Importazione font: Inter per i testi, Outfit per il titolo e Poppins per il sottotitolo */
+    /* Importazione font */
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Outfit:wght=700;800&family=Poppins:wght@600;700&display=swap');
     
-    /* Font di lettura pulito per i testi nativi di Streamlit per fare contrasto */
     html, body, [class*="st-"], p, div, label, span, button, select, input, textarea {
         font-family: 'Inter', sans-serif !important;
     }
     
-    /* CONFIGURAZIONE DEL LIVELLO INTERFACCIA DI STREAMLIT */
-    /* Rendiamo trasparenti i contenitori nativi così lo sfondo personalizzato sottostante è visibile */
-    [data-testid="stAppViewContainer"], [data-testid="stHeader"], [data-testid="stMain"] {
+    /* 1. ABBATTIAMO I MURI BIANCHI DI STREAMLIT */
+    /* Forziamo la trasparenza su tutti i contenitori principali */
+    .stApp, [data-testid="stAppViewContainer"], [data-testid="stHeader"], [data-testid="stMainBlockContainer"] {
         background-color: transparent !important;
+        background: transparent !important;
     }
-    
-    /* IL NUOVO CONTENITORE DELLO SFONDO: Completamente isolato e spedito sul fondo */
-    .super-sfondo-animato {
+
+    /* 2. INIETTIAMO LO SFONDO NEL CONTENITORE MADRE */
+    /* Usando ::before lo sfondo si posiziona dietro i contenuti senza sfocare i testi */
+    [data-testid="stAppViewContainer"]::before {
+        content: "";
         position: fixed;
         top: 0;
         left: 0;
         width: 100vw;
         height: 100vh;
-        z-index: -999999 !important; /* Valore estremo per stare dietro a TUTTO */
+        z-index: -999;
         background-size: cover !important;
         background-position: center !important;
-        filter: blur(15px); /* Forza l'effetto sfocato premium */
-        transform: scale(1.1); /* Previene i bordi bianchi causati dal blur */
-        pointer-events: none !important; /* Rende lo sfondo invisibile ai click del mouse */
+        filter: blur(15px);
+        transform: scale(1.1); /* Evita i bordi bianchi causati dal blur */
+        pointer-events: none;
         animation: rotazioneSfondi 60s infinite linear;
     }
 
     /* KEYFRAMES PER ROTAZIONE DELLE IMMAGINI CON OVERLAY COLORATO INTEGRATO */
     @keyframes rotazioneSfondi {
         0%, 30% {
-            background-image: linear-gradient(135deg, rgba(255, 240, 242, 0.25) 0%, rgba(255, 31, 118, 0.45) 100%), 
+            background-image: linear-gradient(135deg, rgba(255, 240, 242, 0.4) 0%, rgba(255, 31, 118, 0.7) 100%), 
                               url('https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?q=80&w=1920&auto=format&fit=crop');
         }
         33.33% {
-            background-image: linear-gradient(135deg, rgba(255, 240, 242, 0.25) 0%, rgba(255, 31, 118, 0.45) 100%), 
+            background-image: linear-gradient(135deg, rgba(255, 240, 242, 0.4) 0%, rgba(255, 31, 118, 0.7) 100%), 
                               url('https://images.unsplash.com/photo-1518199266791-5375a83190b7?q=80&w=1920&auto=format&fit=crop');
         }
         36.66%, 63.33% {
-            background-image: linear-gradient(135deg, rgba(255, 240, 242, 0.25) 0%, rgba(255, 31, 118, 0.45) 100%), 
+            background-image: linear-gradient(135deg, rgba(255, 240, 242, 0.4) 0%, rgba(255, 31, 118, 0.7) 100%), 
                               url('https://images.unsplash.com/photo-1518199266791-5375a83190b7?q=80&w=1920&auto=format&fit=crop');
         }
         66.66% {
-            background-image: linear-gradient(135deg, rgba(255, 240, 242, 0.25) 0%, rgba(255, 31, 118, 0.45) 100%), 
+            background-image: linear-gradient(135deg, rgba(255, 240, 242, 0.4) 0%, rgba(255, 31, 118, 0.7) 100%), 
                               url('https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1920&auto=format&fit=crop');
         }
         70%, 96.66% {
-            background-image: linear-gradient(135deg, rgba(255, 240, 242, 0.25) 0%, rgba(255, 31, 118, 0.45) 100%), 
+            background-image: linear-gradient(135deg, rgba(255, 240, 242, 0.4) 0%, rgba(255, 31, 118, 0.7) 100%), 
                               url('https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1920&auto=format&fit=crop');
         }
         100% {
-            background-image: linear-gradient(135deg, rgba(255, 240, 242, 0.25) 0%, rgba(255, 31, 118, 0.45) 100%), 
+            background-image: linear-gradient(135deg, rgba(255, 240, 242, 0.4) 0%, rgba(255, 31, 118, 0.7) 100%), 
                               url('https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?q=80&w=1920&auto=format&fit=crop');
         }
     }
@@ -106,7 +106,6 @@ st.markdown(
         -webkit-text-fill-color: transparent;
     }
 
-    /* SOTTOTITOLO INGRANDITO E CON FONT AGGIORNATO */
     .titolo-custom-container h3.sottotitolo-custom {
         font-family: 'Poppins', system-ui, -apple-system, sans-serif !important;
         font-size: 38px !important;
@@ -120,21 +119,18 @@ st.markdown(
         padding: 0 !important;
     }
     
-    /* Box contenitore del logo */
     .logo-container {
         text-align: center;
         margin: 15px auto;
         width: 100%;
     }
     
-    /* Controllo totale dimensione logo */
     .logo-container img {
         max-width: 35% !important;
         height: auto !important;
         border-radius: 12px;
     }
     
-    /* Bottone viola scuro personalizzato */
     .stButton>button {
         width: 100% !important;
         border-radius: 30px !important;
@@ -178,7 +174,7 @@ else:
     st.warning("File 'logo nero.png' non trovato nella cartella del progetto.")
 # -----------------------------------------------------------------------
 
-# 3. Configurazione OpenAI sicura per Streamlit Cloud
+# 3. Configurazione OpenAI
 client = OpenAI(
     api_key=st.secrets["OPENAI_API_KEY"]
 )
@@ -222,7 +218,7 @@ with tab1:
             with st.spinner("L'esperto AI sta creando la tua bio..."):
                 prompt_bio = f"""
                 Sei un esperto di dating app e approcci sui comportamenti degli utenti.
-                Genera una newline bio per Tinder che sia originale, inclusiva e non banale.
+                Genera una nuova bio per Tinder che sia originale, inclusiva e non banale.
 
                 Dati Utente:
                 Genere: {genere}
@@ -315,17 +311,15 @@ with tab3:
                 
                 risposta_ai = res.choices[0].message.content
                 
-                # Parsing del Cringe Score per la barra grafica di Streamlit
                 try:
                     parts = risposta_ai.split("CRINGE_SCORE:")
                     cringe_score_raw = parts[1].split("\n")[0].strip()
                     cringe_score = int(''.join(filter(str.isdigit, cringe_score_raw)))
                     testo_pulito = parts[0] + parts[1].replace(cringe_score_raw, "", 1)
                 except:
-                    cringe_score = 5  # Fallback di sicurezza
+                    cringe_score = 5
                     testo_pulito = risposta_ai
                 
-                # Visualizzazione grafica del Cringiometro
                 st.write("### 🚨 Risultato del Cringiometro:")
                 
                 if cringe_score <= 3:
@@ -335,7 +329,6 @@ with tab3:
                 else:
                     st.error(f"**Livello di Cringe: {cringe_score}/10** — EMERGENZA! Livello di cringe oltre i limiti consentiti dalla legge. Riscrivila subito.")
                 
-                # Visualizza la barra (Streamlit accetta float da 0.0 a 1.0)
                 st.progress(cringe_score / 10)
                 
                 st.markdown("---")
