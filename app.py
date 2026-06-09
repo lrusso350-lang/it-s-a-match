@@ -7,7 +7,7 @@ from openai import OpenAI
 
 # 0. CONFIGURAZIONE PAGINA (Aggiunge la fiammella e il titolo nella scheda del browser)
 st.set_page_config(
-    page_title="It's a match!",
+    page_title="It's a matchi!",
     page_icon="🧩",
     layout="centered"
 )
@@ -20,7 +20,7 @@ st.markdown(
     """
     <style>
     /* Importazione font: Inter per i testi e Syne per il titolo moderno d'impatto */
-   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Outfit:wght@700;800&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Outfit:wght@700;800&family=Manrope:wght@500;600;700&display=swap');
     
     /* Font di lettura pulito per i testi nativi di Streamlit per fare contrasto */
     html, body, [class*="st-"], p, div, label, span, button, select, input, textarea {
@@ -65,14 +65,15 @@ st.markdown(
 
     /* Sottotitolo pulito e moderno */
     .titolo-custom-container p {
-        font-family: 'Inter', sans-serif !important;
-        font-size: 22px !important;
-        font-weight: 600 !important;
-        color: #5A5A5A !important; 
-        margin-top: 15px !important;
-        margin-bottom: 30px !important;
-        letter-spacing: -0.5px !important;
-    }
+    font-family: 'Manrope', sans-serif !important;
+    font-size: 34px !important;
+    font-weight: 700 !important;
+    color: #FFFFFF !important;
+    margin-top: 10px !important;
+    margin-bottom: 35px !important;
+    letter-spacing: -1px !important;
+    line-height: 1.1 !important;
+}
     
     /* Box contenitore del logo */
     .logo-container {
