@@ -7,7 +7,7 @@ from openai import OpenAI
 
 # 0. CONFIGURAZIONE PAGINA (Aggiunge la fiammella e il titolo nella scheda del browser)
 st.set_page_config(
-    page_title="It's a matchi!",
+    page_title="It's a match!",
     page_icon="🧩",
     layout="centered"
 )
