@@ -10,7 +10,7 @@ from openai import OpenAI
 # =====================================================================
 st.set_page_config(
     page_title="It's a match!",
-    page_icon="https://fonts.gstatic.com/s/e/notoemoji/latest/1f9e9/512.png", # Link diretto per forzare la cache dell'icona
+    page_icon="https://fonts.gstatic.com/s/e/notoemoji/latest/1f9e9/512.png", 
     layout="centered"
 )
 
@@ -31,9 +31,8 @@ st.markdown(
     
     /* CONTENITORE PRINCIPALE SFONDO */
     .stApp {
-        background-color: #FF1F76 !important; /* Colore di fallback */
+        background-color: #FF1F76 !important; 
         position: relative;
-        overflow: hidden;
     }
     
     /* ANIMAZIONE DELLE 3 IMMAGINI SFOCATE (Cambio ogni 20 secondi in loop) */
@@ -44,10 +43,11 @@ st.markdown(
         background-size: cover !important;
         background-position: center !important;
         background-attachment: fixed !important;
-        filter: blur(15px); /* Effetto sfocato premium */
-        transform: scale(1.1); /* Evita bordi bianchi causati dal blur */
-        z-index: -1;
+        filter: blur(15px); 
+        transform: scale(1.1); 
+        z-index: -2 !important; /* Spostato ancora più indietro */
         animation: rotazioneSfondi 60s infinite linear;
+        pointer-events: none !important;
     }
     
     /* OVERLAY SEMI-TRASPARENTE PER MANTENERE IL TESTO LEGGIBILE */
@@ -56,11 +56,11 @@ st.markdown(
         position: fixed;
         top: 0; left: 0; right: 0; bottom: 0;
         background: linear-gradient(135deg, rgba(255, 240, 242, 0.25) 0%, rgba(255, 31, 118, 0.45) 100%) !important;
-        z-index: -1;
-        pointer-events: none;
+        z-index: -1 !important; /*層 Dietro ai moduli di Streamlit */
+        pointer-events: none !important; /* Impedisce di bloccare i click dell'utente */
     }
 
-    /* KEYFRAMES PER ROTAZIONE DELLE IMMAGINI CON DIODOLVENZA */
+    /* KEYFRAMES PER ROTAZIONE DELLE IMMAGINI CON DISSOLVENZA */
     @keyframes rotazioneSfondi {
         0%, 30% {
             background-image: url('https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?q=80&w=1920&auto=format&fit=crop');
