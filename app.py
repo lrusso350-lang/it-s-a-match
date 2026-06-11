@@ -4,10 +4,6 @@ import random
 import os
 import base64
 from openai import OpenAI
-
-# =====================================================================
-# 0. CONFIGURAZIONE PAGINA (TASSATIVAMENTE IN CIMA A TUTTO)
-# =====================================================================
 st.set_page_config(
     page_title="It's a match!",
     page_icon="https://fonts.gstatic.com/s/e/notoemoji/latest/1f9e9/512.png", 
@@ -17,9 +13,7 @@ st.set_page_config(
 # 1. Caricamento dati
 df = pd.read_csv("clustered_bios.csv")
 
-# =====================================================================
-# 2. CONFIGURAZIONE DELLA PAGINA E LIVELLO HTML/CSS PER LO SFONDO
-# =====================================================================
+
 st.markdown(
     """
     <style>
